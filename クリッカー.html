@@ -17,15 +17,14 @@
                 <button id="clickButton">クリック</button>
             </div>
             <div class="skills-container">
-                <button id="speedSkill" onclick="buySkill('speed')">速度アップ（100ポイント）</button>
-                <button id="gachaSkill" onclick="buySkill('gacha')">ガチャ追加（100ポイント）</button>
-                <button id="x4Skill" onclick="buySkill('x4')">4倍（200ポイント）</button>
-                <button id="x6Skill" onclick="buySkill('x6')">6倍（300ポイント）</button>
-                <button id="x8Skill" onclick="buySkill('x8')">8倍（400ポイント）</button>
+                <label for="pointSelector">ポイントを選択:</label>
+                <input type="number" id="pointSelector" min="100" max="100000000" step="100" value="100">
+                <button id="buySkillButton" onclick="buySkill()">スキルを購入</button>
+                <button id="autoModeButton" onclick="toggleAutoMode()">オートモード</button>
             </div>
         </main>
         <aside class="ad-container">
-        
+            <p>広告: ここに広告が表示されます</p>
         </aside>
         <footer>
             <p>&copy; 2024 クリックゲーム</p>
