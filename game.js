@@ -9,7 +9,15 @@ function incrementScore() {
     score += pointMultiplier;
     updateUI();
 
-    if (score > 100000) startAutoMode();
+    if (score > 100000) {
+        convertScore();
+        startAutoMode();
+    }
+}
+
+function convertScore() {
+    score = 100000;
+    updateUI();
 }
 
 function buySkill() {
@@ -26,7 +34,11 @@ function buySkill() {
 }
 
 function updateUI() {
-    document.getElementById('score').innerText = score;
+    document.getElementById('score').innerText = formatScore(score);
+}
+
+function formatScore(score) {
+    return (score > 100000) ? '10万+' : score;
 }
 
 function toggleAutoMode() {
@@ -40,6 +52,8 @@ function startAutoMode() {
     autoIncrementInterval = setInterval(() => {
         score += pointMultiplier;
         updateUI();
+
+        if (score > 100000) convertScore();
     }, 1000);
 }
 
