@@ -1,40 +1,31 @@
 let score = 0;
-let pointMultiplier = 1; // ポイントの倍率
+let pointMultiplier = 1;
+let autoMode = false;
+let autoIncrementInterval;
 
 function incrementScore() {
+    if (autoMode) return;
+
     score += pointMultiplier;
+    updateUI();
+
+    if (score > 100000) {
+        convertScore();
+        startAutoMode();
+    }
+}
+
+function convertScore() {
+    score = 100000;
     updateUI();
 }
 
-function buySkill(skillType) {
-    let cost = 0;
-    let multiplierIncrease = 0;
+function buySkill() {
+    const selectedPoints = +document.getElementById('pointSelector').value;
+    const multiplierIncrease = selectedPoints / 100;
 
-    switch (skillType) {
-        case 'speed':
-            cost = 100;
-            multiplierIncrease = 1;
-            break;
-        case 'gacha':
-            cost = 100;
-            multiplierIncrease = 1;
-            break;
-        case 'x4':
-            cost = 200;
-            multiplierIncrease = 3;
-            break;
-        case 'x6':
-            cost = 300;
-            multiplierIncrease = 5;
-            break;
-        case 'x8':
-            cost = 400;
-            multiplierIncrease = 7;
-            break;
-    }
-
-    if (score >= cost) {
-        score -= cost;
+    if (score >= selectedPoints) {
+        score -= selectedPoints;
         pointMultiplier += multiplierIncrease;
         updateUI();
     } else {
@@ -43,7 +34,27 @@ function buySkill(skillType) {
 }
 
 function updateUI() {
-    document.getElementById('score').innerText = score;
+    document.getElementById('score').innerText = formatScore(score);
+}
+
+function formatScore(score) {
+    return (score > 100000) ? '10万+' : score;
+}
+
+function toggleAutoMode() {
+    autoMode = !autoMode;
+
+    if (autoMode) startAutoMode();
+    else clearInterval(autoIncrementInterval);
+}
+
+function startAutoMode() {
+    autoIncrementInterval = setInterval(() => {
+        score += pointMultiplier;
+        updateUI();
+
+        if (score > 100000) convertScore();
+    }, 1000);
 }
 
 document.getElementById('clickButton').addEventListener('click', incrementScore);

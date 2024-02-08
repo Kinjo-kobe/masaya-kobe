@@ -10,26 +10,21 @@ body {
     margin: 20px auto;
     background-color: #fff;
     border-radius: 8px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     overflow: hidden;
 }
 
-header {
+header, footer {
     background-color: #3498db;
     color: #fff;
     padding: 20px;
-    border-bottom: 1px solid #ddd;
-}
-
-header h1 {
-    margin: 0;
 }
 
 main {
     padding: 20px;
 }
 
-.game-container {
+.game-container, .skills-container {
     text-align: center;
     margin-bottom: 20px;
 }
@@ -51,8 +46,8 @@ button:hover {
     background-color: #27ae60;
 }
 
-.skills-container {
-    text-align: center;
+label {
+    margin-right: 10px;
 }
 
 .ad-container {
@@ -63,11 +58,8 @@ button:hover {
 }
 
 footer {
-    background-color: #3498db;
-    color: #fff;
-    padding: 10px 20px;
-    text-align: center;
     position: fixed;
     bottom: 0;
     width: 100%;
+    text-align: center;
 }
